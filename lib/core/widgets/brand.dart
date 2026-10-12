@@ -14,34 +14,43 @@ class BrandMark extends StatelessWidget {
     super.key,
     this.size = 36,
     this.showPacket = true,
+    this.fullBleed = false,
   });
 
   final double size;
   final bool showPacket;
+
+  /// Square, edge-to-edge plate — for app icons, which the platform masks
+  /// itself. Leaving the rounded plate on would clip corners twice.
+  final bool fullBleed;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox.square(
       dimension: size,
       child: CustomPaint(
-        painter: _BrandPainter(showPacket: showPacket),
+        painter: _BrandPainter(
+          showPacket: showPacket,
+          fullBleed: fullBleed,
+        ),
       ),
     );
   }
 }
 
 class _BrandPainter extends CustomPainter {
-  const _BrandPainter({required this.showPacket});
+  const _BrandPainter({required this.showPacket, required this.fullBleed});
 
   final bool showPacket;
+  final bool fullBleed;
 
   @override
   void paint(Canvas canvas, Size size) {
     final w = size.width;
     final h = size.height;
-    final inset = w * 0.17;
+    final inset = fullBleed ? 0.0 : w * 0.17;
     final r = Rect.fromLTWH(inset, inset, w - inset * 2, h - inset * 2);
-    final rad = Radius.circular(w * 0.30);
+    final rad = Radius.circular(w * (fullBleed ? 0.0 : 0.30));
 
     // Rounded-square container so the mark reads on any background.
     final plate = Paint()

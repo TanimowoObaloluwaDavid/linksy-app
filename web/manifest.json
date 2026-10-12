@@ -1,11 +1,11 @@
 {
-    "name": "linksy",
-    "short_name": "linksy",
+    "name": "Linksy — send files, get a link",
+    "short_name": "Linksy",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#0B0D12",
+    "theme_color": "#0B0D12",
+    "description": "Sharing-first file transfer. Select files, create a secure share, and let another person open it through a link or QR code — no account needed.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

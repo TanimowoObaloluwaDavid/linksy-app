@@ -10,6 +10,26 @@ repository layer. The screens are real; the data behind them is local, because
 no Firebase project is configured for this build.
 
 <p align="center">
+  <img src="screenshots/00-app-icon.png" width="620" alt="Linksy app icon at five sizes" />
+</p>
+
+### The icon
+
+<p align="center"><img src="web/icons/Icon-192.png" width="96" alt="Linksy icon" /></p>
+
+Two interlocking arcs — the two parties — with a cyan packet travelling between
+them. The same `CustomPainter` that draws the mark in the app bar also draws the
+launcher icon at every size, so they cannot drift apart:
+
+```sh
+flutter test test/generate_icons.dart --update-goldens
+```
+
+That regenerates all 5 Android mipmaps, all 15 iOS AppIcon sizes, and the 5 web
+icons. Maskable variants render the mark at ~60% on a full-bleed plate, because
+those platforms crop up to 20% from every edge.
+
+<p align="center">
   <img src="screenshots/03-home.png" width="180" alt="Home" />
   <img src="screenshots/04-pick-files.png" width="180" alt="Pick files" />
   <img src="screenshots/05-upload.png" width="180" alt="Upload" />
@@ -49,6 +69,12 @@ it up by default):
 flutter test test/screenshot_harness.dart --update-goldens   # 13 screens
 ```
 
+Regenerate the launcher icon for every platform:
+
+```sh
+flutter test test/generate_icons.dart --update-goldens       # 25 icons
+```
+
 Toolchain used to build this: **Flutter 3.41.6 / Dart 3.11.4**.
 
 `analysis_options.yaml` enables `prefer_const_*`, `directives_ordering`,
@@ -60,7 +86,7 @@ without changing behaviour.
 ### Screenshots
 
 `screenshots/` holds PNGs of all 13 rendered screens at 430×932 (dark and light),
-produced by `test/screenshot_harness.dart`.
+produced by `test/screenshot_harness.dart`, plus the icon preview sheet.
 
 The harness loads the real bundled typefaces and MaterialIcons first. Without
 that, `flutter test` renders every glyph as an Ahem box — uniform width, much
